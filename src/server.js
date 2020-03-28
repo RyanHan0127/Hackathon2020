@@ -40,8 +40,26 @@ server.on('upgrade', function upgrade(request, socket, head) {
 
 server.listen(8080);
 
-global.insnArr = []
-global.insnList = ""
+global.insnArr = [];
+global.insnList = "";
+global.rooms = [];
+
+class Room {
+    constructor (rmName, client1){
+        this.name = rmName;
+        this.p1 = client1;
+        this.p2 = ""
+    }
+    join (client2){
+        try{
+            if(client2 != "") throw "Room full" 
+            this.p2 = client2
+        }
+        catch(err){
+            printLog(err);
+        }
+    }
+}
 
 function loadInsns() {
     fs.readFile(__dirname + '\\insns.txt', function (err, data) {
@@ -53,14 +71,13 @@ function loadInsns() {
 
 function getInsn() {
     var lineNum = Math.floor(Math.random() * insnArr.length);
-    printLog(insnArr[lineNum]);
+    return insnArr[lineNum]
 }
 
 function generateRoomName() {
     var name = ""
     for (i = 0; i < 5; i++) {
         var charNum = Math.floor(Math.random() * 62);
-        var char = ''
         switch (true) {
             case charNum <= 9: //Number
                 name += charNum.toString();
