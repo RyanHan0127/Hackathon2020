@@ -51,11 +51,12 @@ text-align: center;
 }
 
 input[type=text] {
-background-color:#EBEBEB;
-font-family: Verdana;
-padding: 5px 5px;
-border:none;
-border-radius: 3px;
+  background-color:#EBEBEB;
+  font-family: Verdana;
+  padding: 5px 5px;
+  border:none;
+  border-radius: 3px;
+  margin-right: 80px;
 }
 .flex-container .box {
   width: 50%;
