@@ -26,6 +26,22 @@ input[type=text] {
   border-radius: 3px;
   margin-right: 80px;
 }
+.emoji_display{
+	text-align: center;
+}
+
+.emoji_display .emoji_digits > div{
+  width: 40px;
+  margin: 10px;
+  text-align: center;
+  font-size: 30px;
+  align-items: center;
+  display: inline-block;
+  background-color: #505050;
+  color: white;
+  border-radius: 20px;
+
+}
 .flex-container .box {
   width: 50%;
   margin: 30px;
