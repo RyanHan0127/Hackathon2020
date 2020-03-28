@@ -25,10 +25,6 @@ http.createServer(function (req, res) {
       if (err) throw err;
       global.insnList = data.toString();
       insnArr = insnList.split("\n");
-      printLog(insnList)
-      for(i = 0; i < insnArr.length; i++){
-        printLog(insnArr[i]);
-      }
    });
   }
 
@@ -37,8 +33,35 @@ http.createServer(function (req, res) {
     printLog(insnArr[lineNum]);
   }
 
+  function generateRoomName(){
+    var name = ""
+    for(i = 0; i < 5; i++){
+      var charNum = Math.floor(Math.random() * 62);
+      var char = ''
+      switch(true){
+        case charNum <= 9:
+          name += charNum.toString();
+          break;
+        case charNum <= 35:
+          charNum -= 10;
+          charNum += 65;
+          name += String.fromCharCode(charNum);
+          break;
+        case charNum <= 61:
+          charNum -= 36;
+          charNum += 97;
+          name += String.fromCharCode(charNum);
+          break;
+       default:
+          break;
+      }
+    }
+    return name
+  };
+
   function printLog(text){
     console.log(text);
     res.write(text + os.EOL);
   }
+  
 }).listen(8080);
