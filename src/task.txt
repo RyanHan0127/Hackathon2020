@@ -1,3 +1,9 @@
-sample task here
-more stuff
-even more stuff!!!
+Objectives
+#1 Front end of the browser
+    a) add buttons, video media, text box for instructions, etc.
+    b) CSS
+#2 Back end of the browser
+    a) Create a P2P room by using node.js
+    b) Add list of game instructions (at least 1) and send it to the muted user
+    c) Timer?
+    d) Authentication Token required from Twilio API
