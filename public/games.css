@@ -38,6 +38,35 @@ input[type=text] {
   color: white;
   border-radius: 20px;
 }
+
+.flex-container .user_camera {
+  width: 50%;
+  margin: 30px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  align-items: left;
+  flex-wrap: nowrap;
+  background-color: #505050;
+  color: white;
+  border-radius: 20px;
+  padding: 30px 30px;
+}
+
+.flex-container .time_box {
+  width: 50%;
+  margin: 30px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  align-items: left;
+  flex-wrap: nowrap;
+  background-color: #505050;
+  color: white;
+  border-radius: 20px;
+  padding: 30px 30px;
+}
+
 .rule_heading{
   text-align: center;
   padding: 0;
