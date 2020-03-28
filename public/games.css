@@ -67,6 +67,34 @@ input[type=text] {
   padding: 30px 30px;
 }
 
+.g1_button_container {
+display: flex;
+flex-wrap: wrap;
+}
+
+
+.emoji_buttons {
+  height: 60px;
+  width: 720px;
+  align-items: center;
+  text-align: center;
+}
+
+.g1_button_container > div {
+
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  height: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid black;
+}
+
 .rule_heading{
   text-align: center;
   padding: 0;

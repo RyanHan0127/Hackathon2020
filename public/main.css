@@ -23,6 +23,7 @@ body{
   display: inline-block;
   font-size: 16px;
   border-radius: 5px;
+  border: 1px solid black;
 }
 
 .start_button {
@@ -37,6 +38,7 @@ body{
   display: inline-block;
   font-size: 16px;
   border-radius: 5px;
+  border: 1px solid black;
 }
 .ready_buttons{
 	text-align: center;
@@ -51,6 +53,7 @@ body{
   display: inline-block;
   font-size: 16px;
   border-radius: 5px;
+  border: 1px solid black;
 }
 
 .Controls {
@@ -93,3 +96,4 @@ ol {
   list-style-type: none;
   text-align: left;
 }
+
