@@ -16,32 +16,62 @@ client.video.rooms.create({
 }).then(room => console.log(room.sid));
 */
 
+global.create = 1;
+global.join = 2;
+
 const server = http.createServer();
 //const wss = new WebSocket.Server({ noServer: true });
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
-        console.log('Received message ${msg}');
+        console.log(`Received message ${msg} from user ${client}`);
+        switch (msg){
+            case msg == create:
+                console.log(`Received create message`);
+                //create function here
+                break;
+            case msg == join:
+                console.log(`Received join message`);
+                //join function here
+                break;
+            default:
+                console.log(`Unknown message: ${msg}`);
+                break;
+        }
     });
 });
 
+server.on('upgrade', function upgrade(request, socket, head) {
+    authenticate(request, (err, client) => {
+        if (err || !client) {
+            socket.destroy();
+            return;
+        }
+
+        wss.handleUpgrade(request, socket, head, function done(ws) {
+            wss.emit('connection', ws, request, client);
+        });
+    });
+});
+
+server.listen(8080);
 
 global.insnArr = [];
 global.insnList = "";
 global.rooms = [];
 
 class Room {
-    constructor(rmName, client1) {
+    constructor (rmName, client1){
         this.name = rmName;
         this.p1 = client1;
         this.p2 = ""
     }
-    join(client2) {
-        try {
-            if (client2 != "") throw "Room full"
+    join (client2){
+        try{
+            if(client2 != "") throw "Room full" 
             this.p2 = client2
         }
-        catch (err) {
+        catch(err){
             printLog(err);
         }
     }
