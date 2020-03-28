@@ -1,6 +1,6 @@
 var http = require('http');
-var WebSocketServer = require('websocket').server;
-const net = require('net');
+var WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
 /*
@@ -17,22 +17,28 @@ client.video.rooms.create({
 */
 
 const server = http.createServer();
+//const wss = new WebSocket.Server({ noServer: true });
+
+wss.on('connection', function connection(ws, request, client) {
+    ws.on('message', function message(msg) {
+        console.log(`Received message ${msg} from user ${client}`);
+    });
+});
+
+server.on('upgrade', function upgrade(request, socket, head) {
+    authenticate(request, (err, client) => {
+        if (err || !client) {
+            socket.destroy();
+            return;
+        }
+
+        wss.handleUpgrade(request, socket, head, function done(ws) {
+            wss.emit('connection', ws, request, client);
+        });
+    });
+});
+
 server.listen(8080);
-
-const wsServer = new WebSocketServer({
-    httpServer: server
-});
-
-wsServer.on('request', function (request) {
-    const connection = request.accept(null, request.origin);
-    connection.on('message', function (message) {
-        console.log('Received Message:', message.utf8Data);
-        connection.sendUTF('Hi this is WebSocket server!');
-    });
-    connection.on('close', function (reasonCode, description) {
-        console.log('Client has disconnected.');
-    });
-});
 
 global.insnArr = []
 global.insnList = ""
