@@ -1,16 +1,19 @@
-const WebSocket = require('websocket');
+//var WebSocket = require('websocket').client;
 
-const socket = new WebSocket('ws://localhost:8080');
-var createRoom = document.getElementById("something");
-var joinRoom = document.getElementById("something");
+//var socket = new WebSocket('ws://localhost:8080');
 
-createRoom.onclick = function () {
-    socket.send("Create");
+function createRoomButton() {
+    console.log("Clicked button");
 }
 
+function joinRoomButton() {
+    console.log("Clicked button");
+}
+
+/*
 joinRoom.onclick = function () {
     var msg = {
-        text: document.getElementById("text box")
+        text: document.getElementById(room_code)
     };
     socket.send(msg);
 }
@@ -22,3 +25,4 @@ socket.onopen = function (event) {
 socket.onmessage = function (event) {
     console.log(event.data);
 };
+*/

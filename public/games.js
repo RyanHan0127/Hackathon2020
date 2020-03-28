@@ -8,16 +8,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   });
 }
 
-// 
-var countDownDate = new Date().getTime() + 2*60*1000;
-
+// 2 minute timer
+var countDownDate = new Date().getTime() + 2*60*1000 + 2000;
 // Update the count down every 1 second
 var x = setInterval(function() {
 
-  // Get today's date and time
+  // current time
   var now = new Date().getTime();
     
-  // Find the distance between now and the count down date
+  // Find the distance between now and the count down time
   var distance = countDownDate - now;
     
   // Time calculations for days, hours, minutes and seconds
@@ -27,9 +26,8 @@ var x = setInterval(function() {
   // Output the result in an element with id="timer"
   document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
     
-  // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("timer").innerHTML = "Time is gone!";
+    document.getElementById("timer").innerHTML = "Time is gone! &#x1F980 &#x1F980 &#x1F980";
   }
 }, 1000);
