@@ -66,6 +66,11 @@
         ws.onopen = function (event) {
             console.log("Connection established");
         }
+
+        function createRoomButton() {
+            ws.send('Create');
+            console.log("Sending to create room");
+        }
     </script>
 </body>
 </html>

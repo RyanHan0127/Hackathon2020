@@ -21,7 +21,7 @@ const server = http.createServer();
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
-        console.log(`Received message ${msg} from user ${client}`);
+        console.log('Received message ${msg}');
     });
 });
 
