@@ -2,6 +2,16 @@ var http = require('http');
 var fs = require("fs");
 var os = require("os");
 
+const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
+const authToken = 'something';
+const client = require('twilio')(accountSid, authToken);
+
+client.video.rooms.create({
+    enableTurn: true,
+    statusCallback: 'http://example.org',
+    type: 'peer-to-peer',
+    uniqueName: 'DailyStandup'
+}).then(room => console.log(room.sid));
 
 global.insnArr = []
 global.insnList = ""
