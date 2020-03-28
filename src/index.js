@@ -4,7 +4,7 @@ var os = require("os");
 
 const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
 const authToken = 'something';
-const client = require('twilio')(accountSid, authToken);
+const client = require('twilio-video')(accountSid, authToken);
 
 client.video.rooms.create({
     enableTurn: true,
