@@ -3,37 +3,27 @@ var WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
-/*
-const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
-const authToken = 'something';
-const client = require('twilio-video')(accountSid, authToken);
 
-client.video.rooms.create({
-    enableTurn: true,
-    statusCallback: 'http://example.org',
-    type: 'peer-to-peer',
-    uniqueName: 'DailyStandup'
-}).then(room => console.log(room.sid));
-*/
+global.insnArr = [];
+global.insnList = "";
+global.rooms = [];
 
 const server = http.createServer();
-//const wss = new WebSocket.Server({ noServer: true });
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
-        console.log(`Received message ${msg} from user ${client}`);
-        switch (msg){
-            case 1:
-                console.log(`Received create message`);
-                var code = generateRoomName();
-                ws.send(code);
+        console.log('Received message ${msg} from user ${client}');
+        switch (true) {
+            case msg[0] == 1:
+                console.log('Received create message');
+                ws.send(makeRoom());
                 break;
-            case 2:
-                console.log(`Received join message`);
-                //join function here
+            case msg[0] == 2:
+                console.log('Received join message');
+                joinRoom(msg[1]);
                 break;
             default:
-                console.log(`Unknown message: ${msg}`);
+                console.log('Unknown message: ${msg}');
                 break;
         }
     });
@@ -54,27 +44,6 @@ server.on('upgrade', function upgrade(request, socket, head) {
 
 server.listen(8080);
 
-global.insnArr = [];
-global.insnList = "";
-global.rooms = [];
-
-class Room {
-    constructor (rmName, client1){
-        this.name = rmName;
-        this.p1 = client1;
-        this.p2 = ""
-    }
-    join (client2){
-        try{
-            if(client2 != "") throw "Room full" 
-            this.p2 = client2
-        }
-        catch(err){
-            printLog(err);
-        }
-    }
-}
-
 function loadInsns() {
     fs.readFile(__dirname + '\\insns.txt', function (err, data) {
         if (err) throw err;
@@ -85,7 +54,35 @@ function loadInsns() {
 
 function getInsn() {
     var lineNum = Math.floor(Math.random() * insnArr.length);
-    return insnArr[lineNum]
+    return insnArr[lineNum];
+}
+
+function makeRoom() {
+    const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
+    const authToken = 'something';
+    const client = require('twilio-video')(accountSid, authToken);
+
+    var rmCode = generateRoomName();
+    while (rooms.find(rmCode)) {
+        rmCode = generateRoomName();
+    }
+    client.video.rooms.create({
+        enableTurn: true,
+        statusCallback: 'http://example.org',
+        type: 'peer-to-peer',
+        uniqueName: rmCode,
+    }).then(room => console.log(room.sid));
+    rooms.add(rmCode);
+    return rmCode;
+}
+
+function joinRoom(rmCode) {
+    if (rooms.find(rmCode)) {
+        ws.send(rmCode);
+    }
+    else {
+        ws.send("");
+    }
 }
 
 function generateRoomName() {
@@ -108,7 +105,7 @@ function generateRoomName() {
                 break;
         }
     }
-    return name
+    return name;
 };
 
 function printLog(text) {
