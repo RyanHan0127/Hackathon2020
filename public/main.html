@@ -61,6 +61,11 @@
             <button class="join_button">Join Room</button>
         </div>
     </div>
-    <script src="client_main.js"></script>
+    <script>
+        var ws = new WebSocket('ws://localhost:8080');
+        ws.onopen = function (event) {
+            console.log("Connection established");
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "name": "hackathon",
+  "version": "1.0.0",
+  "description": "Our project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanHan0127/Hackathon2020.git"
+  },
+  "author": "Ryan Han",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanHan0127/Hackathon2020/issues"
+  },
+  "homepage": "https://github.com/RyanHan0127/Hackathon2020#readme"
+}
