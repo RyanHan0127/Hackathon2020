@@ -25,12 +25,13 @@ const server = http.createServer();
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
         console.log(`Received message ${msg} from user ${client}`);
-        switch (msg){
-            case msg == create:
+        switch (true){
+            case msg == 1:
                 console.log(`Received create message`);
-                //create function here
+                var code = generateRoomName();
+                ws.send(code);
                 break;
-            case msg == join:
+            case msg == 2:
                 console.log(`Received join message`);
                 //join function here
                 break;
