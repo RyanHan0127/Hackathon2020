@@ -74,8 +74,9 @@ flex-wrap: wrap;
 
 
 .emoji_buttons {
+	margin: auto;
   height: 60px;
-  width: 720px;
+  width: 700px;
   align-items: center;
   text-align: center;
 }
@@ -84,7 +85,7 @@ flex-wrap: wrap;
 
   background-color: #008CBA;
   border: none;
-  color: white;
+  color: white; 
   padding: 15px 32px;
   height: 30px;
   width: 50px;
