@@ -9,7 +9,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 // 2 minute timer
-var countDownDate = new Date().getTime() + 2*60*1000;
+var countDownDate = new Date().getTime() + 2*60*1000 + 2000;
 // Update the count down every 1 second
 var x = setInterval(function() {
 
