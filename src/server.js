@@ -16,22 +16,19 @@ client.video.rooms.create({
 }).then(room => console.log(room.sid));
 */
 
-global.create = 1;
-global.join = 2;
-
 const server = http.createServer();
 //const wss = new WebSocket.Server({ noServer: true });
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
         console.log(`Received message ${msg} from user ${client}`);
-        switch (true){
-            case msg == 1:
+        switch (msg){
+            case 1:
                 console.log(`Received create message`);
                 var code = generateRoomName();
                 ws.send(code);
                 break;
-            case msg == 2:
+            case 2:
                 console.log(`Received join message`);
                 //join function here
                 break;
