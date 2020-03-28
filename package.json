@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RyanHan0127/Hackathon2020/issues"
   },
-  "homepage": "https://github.com/RyanHan0127/Hackathon2020#readme"
+  "homepage": "https://github.com/RyanHan0127/Hackathon2020#readme",
+  "dependencies": {
+    "twilio-video": "^2.0.0"
+  }
 }

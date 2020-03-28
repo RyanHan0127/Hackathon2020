@@ -68,7 +68,19 @@
         }
 
         ws.onmessage = function (event) {
-            console.log("Code is: " + event.data);
+            console.log("Code is: " + event.data); 
+            var res = event.data.split(" ");
+            if (res[0] == 1) {
+                console.log("Code is from create: " + res[1]);
+            } else if (res[0] == 2) {
+                if (res[1].length != 0) {
+                    console.log("Code is from join: " + res[1]);
+                } else {
+                    console.log("Cannot join room");
+                }
+            } else {
+                console.log("Could not process");
+            }
         }
 
         function createRoomButton() {
