@@ -67,9 +67,18 @@
             console.log("Connection established");
         }
 
+        ws.onmessage = function (event) {
+            console.log("Code is: " + event.data);
+        }
+
         function createRoomButton() {
-            ws.send('Create');
+            ws.send(1);
             console.log("Sending to create room");
+        }
+
+        function joinRoomButton() {
+            ws.send(2);
+            console.log("Sending to join room");
         }
     </script>
 </body>
