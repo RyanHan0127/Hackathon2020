@@ -1,14 +1,14 @@
 var WebSocket = require('ws');
 const AccessToken = require('twilio').jwt.AccessToken;
-const { connect, createLocalTracks } = require('twilio-video');
+const Video = require('twilio-video');
 const VideoGrant = AccessToken.VideoGrant;
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
 var apiKeySid = 'SK70f247dc0606d80f0a7232a18e50b99c';
-var apiKeySecret = 'secret';
+var apiKeySecret = 'cupMweVKv5OY5ILnt4mQWDQUBRJTOj5N';
 var accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
-var authToken = 'secret';
+var authToken = '4c0956b87853e5f10e58ff59a23ee185';
 
 global.rooms = [];
 
@@ -36,18 +36,13 @@ wss.on('connection', function connection(ws, request, client) {
                 token.addGrant(videoGrant);
                 console.log(token.toJwt());
 
-                createLocalTracks({
-                    audio: true,
-                    video: { width: 640 }
-                }).then(localTracks => {
-                    return connect(token.toJwt(), {
-                        name: res[2],
-                        tracks: localTracks
-                    });
-                }).then(room => {
-                    console.log(`Successfully joined a Room: ${room}`);
-                }, error => {
-                    console.error(`Unable to connect to Room: ${error.message}`);
+                var connectOptions = {
+                    name: res[1],
+                    logLevel: 'debug'
+                };
+
+                Video.connect(token.toJwt(), connectOptions).then("Success", function (error) {
+                    console.log('Could not connect to Twilio: ' + error.message);
                 });
                 var msg = "3" + " " + "Join";
                 ws.send(msg);
