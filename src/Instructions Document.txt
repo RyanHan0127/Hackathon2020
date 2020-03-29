@@ -1,0 +1,33 @@
+﻿Welcome to PLACEHOLDER TEXT! This is the instruction manual to help you and your partner solve a series of puzzles!
+Strike a Pose!
+In this puzzle, you need to strike a pose to help your partner match the color to the corresponding pose!
+
+
+* RED = DAB
+* GREEN = T-POSE
+* BLUE = INSERT POSE
+Number Games
+In this puzzle, you need to alter a number your partner gives you. The rules are listed below in order of priority, changing the number sequentially with each step. Once you have the correct translated number, find some way to get it back to your partner!
+
+
+1. If your original number is divisible by 4, divide it by 2.
+2. If your number is a factor of 100, add 12 to it.
+3. If your number is a perfect square, multiply it by 5. Otherwise, multiply it by 3.
+4. If your number is an odd number, your new number is 8. Otherwise, subtract 17 from your number.
+5. If your final number is a multiple of 2, square the number.
+Emoji Sequencer
+In this puzzle, you need to help your partner choose the right emojis to crack the code.
+
+
+Insert Emojis Here
+Watch Your Phrasing
+In this puzzle, you need to identify which sequence is the correct sequence. Your partner has a bank of words to choose from, and it is up to you to tell them which sequence matches their word bank.
+
+
+My Dog Walks Willingly
+The Dog Runs Fast
+Your Cat Sleeps Quietly
+Your Dog Jumps Slowly
+The Bear Sleeps Quietly
+The Cat Runs Slowly
+My Bear Jumps Willingly
