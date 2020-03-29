@@ -68,10 +68,10 @@
         }
 
         ws.onmessage = function (event) {
-            console.log("Code is: " + event.data); 
             var res = event.data.split(" ");
             if (res[0] == 1) {
                 console.log("Code is from create: " + res[1]);
+                window.location.href = "wait.html";
             } else if (res[0] == 2) {
                 if (res[1].length != 0) {
                     console.log("Code is from join: " + res[1]);
