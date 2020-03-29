@@ -33,6 +33,9 @@ body{
   border-radius: 5px;
   border: 1px solid black;
 }
+.join_button:active {
+	background-color: #3e8e41;
+}
 
 .start_button {
   background-color: #008CBA;
@@ -48,6 +51,9 @@ body{
   border-radius: 5px;
   border: 1px solid black;
 }
+.start_button:active{
+	background-color: #3e8e41;
+}
 .ready_buttons{
 	text-align: center;
 }
@@ -62,6 +68,9 @@ body{
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid black;
+}
+.ready_button:active{
+	background-color: #3e8e41;
 }
 
 .Controls {

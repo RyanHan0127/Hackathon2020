@@ -29,6 +29,25 @@ input[type=text] {
   border:none;
   border-radius: 3px;
 }
+.game4_submit{
+	text-align: center;
+	
+}
+.submit_button{
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.submit_button:active{
+  background-color: #3e8e41;
+}
 .emoji_display{
 	text-align: center;
 }
@@ -110,19 +129,22 @@ flex-wrap: wrap;
   text-align: center;
 }
 
-.g1_button_container > div {
+.g1_button_container > button {
 
   background-color: #008CBA;
   border: none;
   color: white; 
-  padding: 15px 32px;
-  height: 30px;
-  width: 50px;
+  height: 60px;
+  width: 114px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   border: 1px solid black;
+}
+
+.g1_button_container > button:active {
+  background-color: #3e8e41;
 }
 
 .rule_heading{
