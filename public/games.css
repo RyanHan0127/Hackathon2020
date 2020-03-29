@@ -13,27 +13,6 @@ body{
 .divider{
 	margin-bottom:15px;
 }
-
-.game3_submit{
-	text-align: center;
-}
-
-.submit_button{
-	  background-color: #008CBA;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid black;
-}
-
-.submit_button:active{
-	background-color: #3e8e41;
-}
 .flex-container {
   display: flex;
   flex-wrap: nowrap;
@@ -210,8 +189,13 @@ flex-wrap: wrap;
   width: 114px;
 }
 
-.left_buttons > button {
+.right_buttons {
+  margin-left: 47%;
+  align-items: center;
+  width: 114px;
+}
 
+.left_buttons > button {
   background-color: #008CBA;
   border: none;
   color: white; 
@@ -223,6 +207,24 @@ flex-wrap: wrap;
   font-size: 16px;
   border: 1px solid black;
   margin-top: 10px;
+}
+
+.right_buttons > button {
+  background-color: Grey;
+  border: none;
+  color: white; 
+  height: 60px;
+  width: 114px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid black;
+  margin-top: 10px;
+}
+
+.button_wrapper {
+  display:flex;
 }
 
 ol {
