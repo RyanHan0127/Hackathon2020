@@ -21,6 +21,10 @@ wss.on('connection', function connection(ws, request, client) {
                 var msg = "2" + " " + joinRoom(msg[1]);
                 ws.send(msg);
                 break;
+            case msg[0] == 3:
+                console.log('Received create waiting message');
+                var msg = "2" + " " + joinRoom(msg[1]);
+                break;
             default:
                 console.log('Unknown message: ${msg}');
                 break;
