@@ -1,6 +1,6 @@
 var WebSocket = require('ws');
 const AccessToken = require('twilio').jwt.AccessToken;
-const { connect } = require('twilio-video');
+const { connect, createLocalTracks } = require('twilio-video');
 const VideoGrant = AccessToken.VideoGrant;
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
@@ -35,12 +35,17 @@ wss.on('connection', function connection(ws, request, client) {
                 });
                 token.addGrant(videoGrant);
                 console.log(token.toJwt());
-                
-                connect(token.toJwt(), { name: res[2] }).then(room => {
-                    console.log(`Successfully joined a Room: ${room}`);
-                    room.on(res[1], participant => {
-                        console.log(`A remote Participant connected: ${participant}`);
+
+                createLocalTracks({
+                    audio: true,
+                    video: { width: 640 }
+                }).then(localTracks => {
+                    return connect(token.toJwt(), {
+                        name: res[2],
+                        tracks: localTracks
                     });
+                }).then(room => {
+                    console.log(`Successfully joined a Room: ${room}`);
                 }, error => {
                     console.error(`Unable to connect to Room: ${error.message}`);
                 });
