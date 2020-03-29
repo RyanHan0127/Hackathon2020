@@ -73,12 +73,14 @@
             if (res[0] == 1) {
                 console.log("Code is from create: " + res[1]);
                 var url = window.location.href;
-                url = url.replace("main.html", "wait.html") + "?name=" + res[1];
-                console.log(url);
+                url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=create";
                 window.location.href = url;
             } else if (res[0] == 2) {
                 if (res[1].length != 0) {
                     console.log("Code is from join: " + res[1]);
+                    var url = window.location.href;
+                    url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=join";
+                    window.location.href = url;
                 } else {
                     console.log("Cannot join room");
                 }
@@ -88,14 +90,13 @@
         }
 
         function createRoomButton() {
-            var msg = [1, ""];
+            var msg = 1 + " " + "";
             ws.send(msg);
             console.log("Sending to create room");
         }
 
         function joinRoomButton() {
-            var msg = [2, document.getElementById("room_code").value];
-            console.log(msg[1]);
+            var msg = 2 + " " + document.getElementById("room_code").value;
             ws.send(msg);
             console.log("Sending to join room");
         }

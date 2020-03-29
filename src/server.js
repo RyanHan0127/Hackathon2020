@@ -7,6 +7,7 @@ global.rooms = [];
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
+        var res = msg.split(" ");
         switch (true) {
             case msg[0] == 1:
                 console.log('Received create message');
@@ -14,13 +15,13 @@ wss.on('connection', function connection(ws, request, client) {
                 ws.send(msg);
                 break;
             case msg[0] == 2:
-                console.log('Received join message ' + msg[1]);
-                var msg = "2" + " " + joinRoom(msg[1]);
+                console.log('Received join message ' + res[1]);
+                var msg = "2" + " " + joinRoom(res[1]);
                 ws.send(msg);
                 break;
             case msg[0] == 3:
                 console.log('Received create waiting message');
-                var msg = "2" + " " + joinRoom(msg[1]);
+                var msg = "3" + " " + joinRoom(msg[1]);
                 break;
             default:
                 console.log('Unknown message: ${msg}');
