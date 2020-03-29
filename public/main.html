@@ -88,12 +88,15 @@
         }
 
         function createRoomButton() {
-            ws.send(1);
+            var msg = [1, ""];
+            ws.send(msg);
             console.log("Sending to create room");
         }
 
         function joinRoomButton() {
-            ws.send(2);
+            var msg = [2, document.getElementById("room_code").value];
+            console.log(msg[1]);
+            ws.send(msg);
             console.log("Sending to join room");
         }
     </script>
