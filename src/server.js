@@ -1,7 +1,14 @@
 var WebSocket = require('ws');
+const AccessToken = require('twilio').jwt.AccessToken;
+const { connect } = require('twilio-video');
+const VideoGrant = AccessToken.VideoGrant;
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
+var apiKeySid = 'SK70f247dc0606d80f0a7232a18e50b99c';
+var apiKeySecret = 'cupMweVKv5OY5ILnt4mQWDQUBRJTOj5N';
+var accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
+var authToken = '4c0956b87853e5f10e58ff59a23ee185';
 
 global.rooms = [];
 
@@ -20,8 +27,25 @@ wss.on('connection', function connection(ws, request, client) {
                 ws.send(msg);
                 break;
             case msg[0] == 3:
-                console.log('Received create waiting message');
-                var msg = "3" + " " + joinRoom(msg[1]);
+                console.log('Received waiting message: ' + res[1]);
+                const token = new AccessToken(accountSid, apiKeySid, apiKeySecret);
+                token.identity = res[2];
+                const videoGrant = new VideoGrant({
+                    room: res[1]
+                });
+                token.addGrant(videoGrant);
+                console.log(token.toJwt());
+                
+                connect(token.toJwt(), { name: res[2] }).then(room => {
+                    console.log(`Successfully joined a Room: ${room}`);
+                    room.on(res[1], participant => {
+                        console.log(`A remote Participant connected: ${participant}`);
+                    });
+                }, error => {
+                    console.error(`Unable to connect to Room: ${error.message}`);
+                });
+                var msg = "3" + " " + "Join";
+                ws.send(msg);
                 break;
             default:
                 console.log('Unknown message: ${msg}');
@@ -31,20 +55,18 @@ wss.on('connection', function connection(ws, request, client) {
 });
 
 function makeRoom() {
-    const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
-    const authToken = 'something';
     const client = require('twilio')(accountSid, authToken);
 
     var rmCode = generateRoomName();
     while (rooms.indexOf(rmCode) != -1) {
         rmCode = generateRoomName();
-        console.log(rooms.indexOf(rmCode))
     }
     client.video.rooms.create({
         enableTurn: true,
         statusCallback: 'http://example.org',
         type: 'peer-to-peer',
         uniqueName: rmCode,
+        max_participants: 2,
     }).then(room => console.log(room.sid));
     rooms.push(rmCode);
     return rmCode;
@@ -53,8 +75,7 @@ function makeRoom() {
 function joinRoom(rmCode) {
     if (rooms.indexOf(rmCode) != -1) {
         return rmCode;
-    }
-    else {
+    } else {
         return "";
     }
 }

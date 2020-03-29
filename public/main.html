@@ -63,7 +63,6 @@
     </div>
     <script>
         var ws = new WebSocket('ws://localhost:8080');
-        console.log(window.location.href);
         ws.onopen = function (event) {
             console.log("Connection established");
         }
@@ -73,13 +72,15 @@
             if (res[0] == 1) {
                 console.log("Code is from create: " + res[1]);
                 var url = window.location.href;
-                url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=create";
+                url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=p1";
+                ws.close();
                 window.location.href = url;
             } else if (res[0] == 2) {
                 if (res[1].length != 0) {
                     console.log("Code is from join: " + res[1]);
                     var url = window.location.href;
-                    url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=join";
+                    url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=p2";
+                    ws.close();
                     window.location.href = url;
                 } else {
                     console.log("Cannot join room");
