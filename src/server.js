@@ -1,4 +1,3 @@
-var http = require('http');
 var WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
@@ -7,8 +6,6 @@ var os = require("os");
 global.insnArr = [];
 global.insnList = "";
 global.rooms = [];
-
-const server = http.createServer();
 
 wss.on('connection', function connection(ws, request, client) {
     ws.on('message', function message(msg) {
@@ -30,21 +27,6 @@ wss.on('connection', function connection(ws, request, client) {
         }
     });
 });
-
-server.on('upgrade', function upgrade(request, socket, head) {
-    authenticate(request, (err, client) => {
-        if (err || !client) {
-            socket.destroy();
-            return;
-        }
-
-        wss.handleUpgrade(request, socket, head, function done(ws) {
-            wss.emit('connection', ws, request, client);
-        });
-    });
-});
-
-server.listen(8080);
 
 function loadInsns() {
     fs.readFile(__dirname + '\\insns.txt', function (err, data) {
