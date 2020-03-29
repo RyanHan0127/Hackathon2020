@@ -3,8 +3,6 @@ const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
 
-global.insnArr = [];
-global.insnList = "";
 global.rooms = [];
 
 wss.on('connection', function connection(ws, request, client) {
@@ -31,19 +29,6 @@ wss.on('connection', function connection(ws, request, client) {
         }
     });
 });
-
-function loadInsns() {
-    fs.readFile(__dirname + '\\insns.txt', function (err, data) {
-        if (err) throw err;
-        global.insnList = data.toString();
-        insnArr = insnList.split("\n");
-    });
-}
-
-function getInsn() {
-    var lineNum = Math.floor(Math.random() * insnArr.length);
-    return insnArr[lineNum];
-}
 
 function makeRoom() {
     const accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
@@ -96,8 +81,3 @@ function generateRoomName() {
     }
     return name;
 };
-
-function printLog(text) {
-    console.log(text);
-    res.write(text + os.EOL);
-}
