@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="games.css">
+<title>Instructions</title>
+</head>
+<body>
+
+<div class="title">   
+    <h1 id="text_title">Game 3</h1>
+</div>
+
+<div class="flex-container">
+  <div class="user_camera">
+    <video id="video" width="640" height="480" autoplay></video>
+  </div>
+  <div class="time_box">
+    <div class="timer">
+      <h3 id = "timer_heading"> 
+        Time Left 
+      </h3>
+      <p id = "timer"></p>
+    </div>
+  </div>
+</div>
+<button type="button" class="collapsible">First</button>
+<div class="content">
+  <p>GAYMEW OUONE</p>
+</div>
+<button type="button" class="collapsible">Second</button>
+<div class="content">
+  <p>two</p>
+</div>
+<button type="button" class="collapsible">Fourth</button>
+<div class="content">
+  <p>tres</p>
+</div>
+<button type="button" class="collapsible">Third</button>
+<div class="content">
+  <p>8====D</p>
+</div>
+<script src="games.js"></script>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
