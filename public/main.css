@@ -5,6 +5,14 @@ body{
   color: white;
 }
 
+.room_code{
+  font-family: "Trebuchet MS";
+  font-size: 800%;
+  text-align:center;
+  margin:auto;
+  align-items:center;
+}
+
 .title{
   font-family: "Trebuchet MS";
   text-align: center;
