@@ -74,7 +74,7 @@
             if (res[0] == 1) {
                 console.log("Code is from create: " + res[1]);
                 var url = window.location.href;
-                url = url.replace("main.html", "wait.html") + "?name=" + res[1] + "&proto=p1";
+                url = url.replace("main.html", "ready.html") + "?name=" + res[1] + "&proto=p1";
                 ws.close();
                 window.location.href = url;
             } else if (res[0] == 2) {

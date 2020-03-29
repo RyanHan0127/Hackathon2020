@@ -1,14 +1,14 @@
 var WebSocket = require('ws');
 const AccessToken = require('twilio').jwt.AccessToken;
-const Video = require('twilio-video');
+const { connect, createLocalTracks } = require('twilio-video');
 const VideoGrant = AccessToken.VideoGrant;
 const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
 var apiKeySid = 'SK70f247dc0606d80f0a7232a18e50b99c';
-var apiKeySecret = 'cupMweVKv5OY5ILnt4mQWDQUBRJTOj5N';
+var apiKeySecret = '';
 var accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
-var authToken = '4c0956b87853e5f10e58ff59a23ee185';
+var authToken = '';
 
 global.rooms = [];
 
@@ -28,21 +28,26 @@ wss.on('connection', function connection(ws, request, client) {
                 break;
             case msg[0] == 3:
                 console.log('Received waiting message: ' + res[1]);
-                const token = new AccessToken(accountSid, apiKeySid, apiKeySecret);
-                token.identity = res[2];
                 const videoGrant = new VideoGrant({
                     room: res[1]
                 });
+
+                const token = new AccessToken(accountSid, apiKeySid, apiKeySecret);
                 token.addGrant(videoGrant);
+                token.identity = res[2];
+
                 console.log(token.toJwt());
 
-                var connectOptions = {
-                    name: res[1],
-                    logLevel: 'debug'
-                };
-
-                Video.connect(token.toJwt(), connectOptions).then("Success", function (error) {
-                    console.log('Could not connect to Twilio: ' + error.message);
+                createLocalTracks({
+                    audio: true,
+                    video: { width: 640 }
+                }).then(localTracks => {
+                    return connect(token.toJwt(), {
+                        name: res[1],
+                        tracks: localTracks
+                    });
+                }).then(room => {
+                    console.log(`Connected to Room: ${room.name}`);
                 });
                 var msg = "3" + " " + "Join";
                 ws.send(msg);
