@@ -6,9 +6,9 @@ const wss = new WebSocket.Server({ port: 8080 });
 var fs = require("fs");
 var os = require("os");
 var apiKeySid = 'SK70f247dc0606d80f0a7232a18e50b99c';
-var apiKeySecret = 'cupMweVKv5OY5ILnt4mQWDQUBRJTOj5N';
+var apiKeySecret = 'secret';
 var accountSid = 'AC106764eeea3ff36b330cabb7a22da37b';
-var authToken = '4c0956b87853e5f10e58ff59a23ee185';
+var authToken = 'secret';
 
 global.rooms = [];
 
